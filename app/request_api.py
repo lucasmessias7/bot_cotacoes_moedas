@@ -1,19 +1,14 @@
-from bot import send_mensage
 from classes import Requisicao_api
 
 
 url = 'https://economia.awesomeapi.com.br/json/'
 
-def request_values(endpoint):
-    endpoint_url = endpoint
-    reponse = Requisicao_api(url,endpoint_url)
-    data = reponse.request('GET')
-    return data
 
 
 def last_recorrence_coin(endpoint,chave_primaria):
-    response = request_values(endpoint=endpoint)
-    valores = response.get(chave_primaria, []) # -> 
+    reponse = Requisicao_api(url,endpoint)
+    data = reponse.request('GET')
+    valores = data.get(chave_primaria, []) # -> 
     if valores:
         saida_name = valores['name']
         maior_valor_dia = valores['high']
@@ -27,9 +22,6 @@ def last_recorrence_coin(endpoint,chave_primaria):
 
 
 
-print(last_recorrence_coin('last/USD-BRL', 'USDBRL'))
-print()
-print(last_recorrence_coin('last/EUR-BRL', 'EURBRL'))
-print()
-print(last_recorrence_coin('last/BTC-BRL', 'BTCBRL'))
+# exemplo - > last_recorrence_coin('last/USD-CNH', 'USDCNH'))
+
     

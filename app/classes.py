@@ -12,4 +12,3 @@ class Requisicao_api():
             response = httpx.get(url)
             data = response.json()
             return data
-
