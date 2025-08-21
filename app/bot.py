@@ -10,29 +10,31 @@ group_id = os.getenv('GROUP_ID')
 api = os.getenv('API_BOT')
 bot = telebot.TeleBot(api)
 
+
 @bot.message_handler(commands=['help', 'start'])
 def send_welcome(message):
-    bot.reply_to(message, text="📊 Bem-vindo ao CriptoBot 📊 \nseu radar inteligente do mercado financeiro!\n Aqui você encontra cotações em tempo real, notícias atualizadas e análises rápidas para tomar decisões mais informadas.\nSeja você investidor iniciante ou experiente, estou pronto para te ajudar a acompanhar o mercado com agilidade e precisão.\n\n")
+    bot.reply_to(message, text="📊 Bem-vindo ao CriptoBot 📊 \nseu radar inteligente do mercado financeiro!\nAqui você encontra cotações em tempo real, notícias atualizadas e análises rápidas para tomar decisões mais informadas.\nSeja você investidor iniciante ou experiente, estou pronto para te ajudar a acompanhar o mercado com agilidade e precisão.\n\n")
 
-@bot.message_handler(commands=['COTACAO_REAL_DOLAR'])
+
+# print(last_recorrence_coin('last/ETH-BRL', 'ETHBRL'))
+@bot.message_handler(commands=['COTACAO_REAL_BTC','COTACAO_REAL_EURO','COTACAO_REAL_YUAN','COTACAO_REAL_DOLAR','COTACAO_REAL_ETH'])
 def send_mensage(message):
-    bot.reply_to(message=message, text=last_recorrence_coin('last/BRL-USD', 'BRLUSD'))
+    resposta = message.text
 
+    if resposta == '/COTACAO_REAL_BTC':    
+        bot.reply_to(message, text=last_recorrence_coin('last/BTC-BRL', 'BTCBRL'))
 
-@bot.message_handler(commands=['COTACAO_REAL_EURO'])
-def send_mensage(message):
-    bot.reply_to(message=message, text=last_recorrence_coin('last/BRL-EUR', 'BRLEUR'))
+    if resposta == '/COTACAO_REAL_EURO':
+        bot.reply_to(message, text=last_recorrence_coin('last/EUR-BRL', 'EURBRL'))
+    
+    if resposta == '/COTACAO_REAL_YUAN':
+        bot.reply_to(message, text=last_recorrence_coin('last/CNY-BRL', 'CNYBRL'))
+    
+    if resposta == '/COTACAO_REAL_DOLAR':
+        bot.reply_to(message, text=last_recorrence_coin('last/USD-BRL', 'USDBRL'))
 
-
-@bot.message_handler(commands=['COTACAO_REAL_YUAN'])
-def send_mensage(message):
-    bot.reply_to(message=message, text=last_recorrence_coin('last/BRL-CNY', 'BRLCNY'))
-
-
-@bot.message_handler(commands=['COTACAO_REAL_BTC'])
-def send_mensage(message):
-    bot.reply_to(message=message, text=last_recorrence_coin('last/USD-CNH', 'USDCNH'))
-
+    if resposta == '/COTACAO_REAL_ETH':
+        bot.reply_to(message, text=last_recorrence_coin('last/ETH-BRL', 'ETHBRL'))
 
 
 bot.polling()
