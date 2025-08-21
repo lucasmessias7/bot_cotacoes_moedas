@@ -8,10 +8,9 @@ group_id = os.getenv('GROUP_ID')
 api = os.getenv('API_BOT')
 bot = telebot.TeleBot(api)
 
-print(api)
 
 def send_mensage(mensagem):
-    bot.send_message(group_id, mensagem)
+    bot.send_message(group_id, mensagem )
 
 
 
